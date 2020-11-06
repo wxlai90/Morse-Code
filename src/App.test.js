@@ -1,9 +1,17 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import App from "./App";
+import ShallowRenderer from 'react-test-renderer/shallow';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+
+describe('#App', () => {
+    it("renders correctly", () => {
+        const renderer = new ShallowRenderer();
+
+        renderer.render(<App />);
+
+        const result = renderer.getRenderOutput()
+
+        expect(result.type).toBe('div')
+        expect(result.props.children.length).toEqual(2)
+    })
+})
